@@ -25,10 +25,18 @@ public class MainActivity extends BaseActivity {
         mRootView.request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mOwner,TestNetActivity.class);
+                Intent intent = new Intent(mOwner, TestNetActivity.class);
                 startActivity(intent);
             }
         });
+        mRootView.web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mOwner, WebActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

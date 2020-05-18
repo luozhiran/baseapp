@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".TestNetActivity">
 
         <Button
@@ -14,5 +15,17 @@
             android:layout_height="wrap_content"
             android:text="请求百度" />
 
+        <Button
+            android:id="@+id/customBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tomcat"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册" />
     </LinearLayout>
 </layout>

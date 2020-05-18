@@ -20,7 +20,7 @@ public class StaticMemoryCache {
     }
 
 
-    StaticMemoryCache cache() {
+    public static StaticMemoryCache cache() {
         return Holder.memoryCache;
     }
 
@@ -42,7 +42,7 @@ public class StaticMemoryCache {
     }
 
     public <T> T getCache(String key, T t) {
-        Object o = mCache.get(key);
+        Object o = mCache.remove(key);
         if (o == null) {
             return t;
         } else {

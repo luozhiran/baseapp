@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.kongzue.dialog.v3.WaitDialog;
 import com.yk.base.base.BaseActivity;
 import com.yk.base.utils.L;
 import com.yk.baseapp.databinding.ActivityTestNetBinding;
@@ -32,21 +33,45 @@ public class TestNetActivity extends BaseActivity implements BaiduView {
                 mTestPresent.getBaidu();
             }
         });
+        mRootView.customBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTestPresent.getTomcat();
+            }
+        });
+        mRootView.register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTestPresent.register();
+            }
+        });
 
     }
 
     @Override
     public void showLoading() {
+        WaitDialog.show(mOwner, "loading...");
         L.d("开始请求");
     }
 
     @Override
     public void hideLoading() {
         L.d("请求结束");
+        WaitDialog.dismiss();
     }
 
     @Override
     public void transContent(String s) {
+        L.d(s);
+    }
+
+    @Override
+    public void tomcat(String s) {
+        L.d(s);
+    }
+
+    @Override
+    public void register(String s) {
         L.d(s);
     }
 }

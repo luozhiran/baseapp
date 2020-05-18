@@ -8,6 +8,7 @@ import com.yk.base.utils.ApkUtils;
 import com.yk.base.utils.DisplayUtils;
 import com.yk.base.utils.FileUtils;
 import com.yk.base.utils.SPUtils;
+import com.yk.base.utils.StaticMemoryCache;
 import com.yk.base.utils.SystemGalleryUtils;
 
 public class InitUtil {
@@ -20,6 +21,7 @@ public class InitUtil {
         ApkUtils.register(context);
         FileUtils.register(context);
         SPUtils.register(context);
+        StaticMemoryCache.cache().register(context);
     }
 
     public static void openActivityLife(Application application, IActivityLifeCallback activityLifeCallback) {
