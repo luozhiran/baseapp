@@ -104,6 +104,13 @@ public abstract class IPresenterImpl<V extends IView> {
                 });
     }
 
+    /**
+     * 处理Repo类请求
+     * @param flowable
+     * @param onResult
+     * @param onEmpty
+     * @param <T>
+     */
     protected <T> void progressFlowableRepo(Flowable<Repo<T>> flowable, OnResult<T> onResult, OnEmpty onEmpty) {
         mView.showLoading();
         flowable.compose(RxScheduler.Flo_io_main())
@@ -116,6 +123,34 @@ public abstract class IPresenterImpl<V extends IView> {
                         } else {
                             onEmpty.empty(repo.code);
                         }
+                        mView.hideLoading();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        //网络异常提示
+                        NetExpection.NetExceptionTrip(throwable);
+                        mView.hideLoading();
+                    }
+                });
+    }
+
+
+    /**
+     * 处理普通类请求
+     * @param flowable
+     * @param onResult
+     * @param onEmpty
+     * @param <T>
+     */
+    protected <T> void progressFlowableCommon(Flowable<T> flowable, OnResult<T> onResult, OnEmpty onEmpty) {
+        mView.showLoading();
+        flowable.compose(RxScheduler.Flo_io_main())
+                .as(bindAutoDispose())
+                .subscribe(new Consumer<T>() {
+                    @Override
+                    public void accept(T repo) throws Exception {
+                        onResult.result(repo);
                         mView.hideLoading();
                     }
                 }, new Consumer<Throwable>() {
