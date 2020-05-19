@@ -30,6 +30,7 @@ import io.reactivex.functions.Consumer;
 public abstract class IPresenterImpl<V extends IView> {
     protected V mView;
     protected Handler mHandle;
+    public static final int ERROR_ = -1111;
 
     /**
      * 绑定view，一般在初始化中调用该方法
@@ -84,7 +85,7 @@ public abstract class IPresenterImpl<V extends IView> {
     }
 
 
-    protected <T> void progressFlowableBody(Flowable<T> flowable, OnResult<T> onResult) {
+    protected <T> void progressFlowableBody(Flowable<T> flowable, OnResult<T> onResult, OnEmpty onEmpty) {
         mView.showLoading();
         flowable.compose(RxScheduler.Flo_io_main())
                 .as(bindAutoDispose())
@@ -99,6 +100,7 @@ public abstract class IPresenterImpl<V extends IView> {
                     public void accept(Throwable throwable) throws Exception {
                         //网络异常提示
                         NetExpection.NetExceptionTrip(throwable);
+                        onEmpty.empty(ERROR_);
                         mView.hideLoading();
                     }
                 });
@@ -130,6 +132,7 @@ public abstract class IPresenterImpl<V extends IView> {
                     public void accept(Throwable throwable) throws Exception {
                         //网络异常提示
                         NetExpection.NetExceptionTrip(throwable);
+                        onEmpty.empty(ERROR_);
                         mView.hideLoading();
                     }
                 });
@@ -158,6 +161,7 @@ public abstract class IPresenterImpl<V extends IView> {
                     public void accept(Throwable throwable) throws Exception {
                         //网络异常提示
                         NetExpection.NetExceptionTrip(throwable);
+                        onEmpty.empty(ERROR_);
                         mView.hideLoading();
                     }
                 });
