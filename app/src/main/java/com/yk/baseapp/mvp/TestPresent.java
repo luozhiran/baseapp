@@ -1,22 +1,23 @@
 package com.yk.baseapp.mvp;
 
-import com.yk.base.mvp.IPresenterImpl;
-import com.yk.base.mvp.OnResult;
+
+import com.yk.mvp_lib.IPresenterImpl;
+import com.yk.net_lib.NetApi;
+import com.yk.net_lib.intefaces.OnEmpty;
+import com.yk.net_lib.intefaces.OnResult;
 
 import java.io.IOException;
 
+import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
 
 public class TestPresent extends IPresenterImpl<BaiduView> {
 
-    private TestModel mTestModel;
 
-    public TestPresent() {
-        mTestModel = new TestModel();
-    }
 
     public void getBaidu() {
-        progressFlowableBody(mTestModel.getBaidu(), new OnResult<ResponseBody>() {
+        Flowable<ResponseBody> flowable = NetApi.getInstance().create(TestApi.class).getBaiduApi("http://www.baidu.com/");
+        progressFlowableBody(flowable, new OnResult<ResponseBody>() {
             @Override
             public void result(ResponseBody responseBody) {
                 try {
@@ -25,12 +26,19 @@ public class TestPresent extends IPresenterImpl<BaiduView> {
                     e.printStackTrace();
                 }
             }
+        }, new OnEmpty() {
+            @Override
+            public void empty(int code, String msg) {
+
+            }
+
         });
     }
 
 
     public void getTomcat() {
-        progressFlowableBody(mTestModel.getTomcat(), new OnResult<ResponseBody>() {
+        Flowable<ResponseBody> flowable = NetApi.getInstance().create(TestApi.class).getTomcatApi("http://192.168.40.163:8099/web/hello");
+        progressFlowableBody(flowable, new OnResult<ResponseBody>() {
             @Override
             public void result(ResponseBody responseBody) {
                 try {
@@ -39,11 +47,19 @@ public class TestPresent extends IPresenterImpl<BaiduView> {
                     e.printStackTrace();
                 }
             }
+        } ,new OnEmpty() {
+
+            @Override
+            public void empty(int code, String msg) {
+
+            }
         });
     }
 
     public void register() {
-        progressFlowableBody(mTestModel.registerAccount(), new OnResult<ResponseBody>() {
+        Flowable<ResponseBody> flowable = NetApi.getInstance().create(TestApi.class)
+                .register("http://192.168.40.163:8099/web/hello","luozhiran","123456","123456");
+        progressFlowableBody(flowable, new OnResult<ResponseBody>() {
             @Override
             public void result(ResponseBody responseBody) {
                 try {
@@ -52,6 +68,12 @@ public class TestPresent extends IPresenterImpl<BaiduView> {
                     e.printStackTrace();
                 }
             }
+        }, new OnEmpty() {
+            @Override
+            public void empty(int code, String msg) {
+
+            }
+
         });
     }
 }

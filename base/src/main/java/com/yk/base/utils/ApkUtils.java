@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
+import com.itg.lib_log.L;
 import com.kongzue.dialog.v3.MessageDialog;
 
 import java.io.File;

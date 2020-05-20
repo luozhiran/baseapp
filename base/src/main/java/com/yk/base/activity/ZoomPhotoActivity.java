@@ -2,17 +2,16 @@ package com.yk.base.activity;
 
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.itg.util_lib.StatusBarUtil;
 import com.kongzue.dialog.interfaces.OnBackClickListener;
 import com.kongzue.dialog.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialog.util.BaseDialog;
 import com.kongzue.dialog.v3.MessageDialog;
 import com.yk.base.R;
-import com.yk.base.utils.StatusBarUtil;
 import com.yk.base.base.BaseActivity;
 import com.yk.base.databinding.ActivityZoomPhotoBinding;
 

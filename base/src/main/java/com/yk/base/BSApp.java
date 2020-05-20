@@ -10,7 +10,7 @@ public class BSApp extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
-        InitUtil.InitUtil(this);
+        InitUtil.initUtil(this);
     }
 
     public static Application getApp() {

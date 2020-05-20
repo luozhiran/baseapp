@@ -1,6 +1,5 @@
 package com.yk.baseapp.mvp;
 
-import com.yk.base.net.Repo;
 
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;

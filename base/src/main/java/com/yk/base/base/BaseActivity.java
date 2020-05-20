@@ -7,14 +7,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 
-import com.uber.autodispose.AutoDispose;
-import com.uber.autodispose.AutoDisposeConverter;
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
+import com.itg.lib_log.L;
+import com.itg.util_lib.StatusBarUtil;
 import com.yk.base.CustomToast;
-import com.yk.base.utils.L;
-import com.yk.base.utils.StatusBarUtil;
 import com.yk.base.WeakHandler;
 
 import java.util.List;
@@ -24,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.Lifecycle;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 

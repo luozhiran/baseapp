@@ -1,2 +1,5 @@
 rootProject.name='BaseApp'
 include ':app', ':base'
+include ':net-lib'
+include ':mvp-lib'
+include ':util-lib'

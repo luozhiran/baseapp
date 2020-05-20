@@ -1,6 +1,7 @@
 package com.yk.baseapp.mvp;
 
-import com.yk.base.mvp.IView;
+
+import com.yk.mvp_lib.IView;
 
 public interface BaiduView extends IView {
     void transContent(String s);

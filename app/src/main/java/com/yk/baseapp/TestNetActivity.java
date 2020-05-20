@@ -1,13 +1,10 @@
 package com.yk.baseapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.View;
 
+import com.itg.lib_log.L;
 import com.kongzue.dialog.v3.WaitDialog;
 import com.yk.base.base.BaseActivity;
-import com.yk.base.utils.L;
 import com.yk.baseapp.databinding.ActivityTestNetBinding;
 import com.yk.baseapp.mvp.BaiduView;
 import com.yk.baseapp.mvp.TestPresent;
