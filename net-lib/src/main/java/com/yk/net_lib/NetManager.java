@@ -80,7 +80,9 @@ public class NetManager {
                                     onEmpty.empty(repo.code, msg);
                                 }
                             } else {
-                                onEmpty.empty(repo.code, repo.msg);
+                                if (NetApi.getInstance().getResponseInterceptor()==null||!NetApi.getInstance().getResponseInterceptor().interceptor(repo.code)){
+                                    onEmpty.empty(repo.code, repo.msg);
+                                }
                             }
                         } else {
                             onEmpty.empty(EMPTY_, msg);

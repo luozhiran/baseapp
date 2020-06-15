@@ -1,6 +1,7 @@
 package com.yk.net_lib;
 
 import com.yk.net_lib.gson.GsonFactory;
+import com.yk.net_lib.intefaces.ResponseInterceptor;
 import com.yk.net_lib.interceptor.HttpLoggingInterceptor;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class NetApi {
     private Retrofit retrofit;
     private HttpLoggingInterceptor loggingInterceptor;
     private static Interceptor customHeader;
+    private ResponseInterceptor responseInterceptor;
 
     private static class Holder {
         private static NetApi netApi = new NetApi();
@@ -35,7 +37,7 @@ public class NetApi {
         loggingInterceptor = OkHttpConfig.getLogInterceptor(HttpLoggingInterceptor.Level.NONE);
         okhttpBuilder = new OkHttpClient().newBuilder();
         okhttpBuilder.addInterceptor(OkHttpConfig.getHeaderInterceptor());
-        if (customHeader!=null){
+        if (customHeader != null) {
             okhttpBuilder.addInterceptor(customHeader);
         }
         okhttpBuilder.addInterceptor(loggingInterceptor);
@@ -58,7 +60,15 @@ public class NetApi {
 
 
     public static void setCustomInterceptor(Interceptor it) {
-          customHeader = it;
+        customHeader = it;
     }
 
+    public void setResponseInterceptor(ResponseInterceptor ri) {
+        responseInterceptor = ri;
+    }
+
+    ResponseInterceptor getResponseInterceptor() {
+
+        return responseInterceptor;
+    }
 }
