@@ -12,11 +12,13 @@ public class SPUtils {
     private SharedPreferences mSp;
     private SharedPreferences.Editor mEdt;
 
-    public static class Holder {
+    private static class Holder {
         public static SPUtils SPUtils = new SPUtils();
     }
 
-
+    public static SPUtils getXml(){
+        return Holder.SPUtils;
+    }
 
 
     /**

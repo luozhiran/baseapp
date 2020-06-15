@@ -2,6 +2,7 @@ package com.itg.util_lib;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.os.Environment;
 
 import java.io.BufferedInputStream;
@@ -173,5 +174,27 @@ public class FileUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void saveImage(String path,String name,Bitmap bmp){
+        File file = new File(path, name);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (fos!=null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
