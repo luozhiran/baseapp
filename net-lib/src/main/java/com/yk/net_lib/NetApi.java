@@ -20,6 +20,7 @@ public class NetApi {
     private OkHttpClient.Builder okhttpBuilder = null;
     private Retrofit retrofit;
     private HttpLoggingInterceptor loggingInterceptor;
+    private Interceptor customHeader;
 
     private static class Holder {
         private static NetApi netApi = new NetApi();
@@ -34,6 +35,9 @@ public class NetApi {
         loggingInterceptor = OkHttpConfig.getLogInterceptor(HttpLoggingInterceptor.Level.NONE);
         okhttpBuilder = new OkHttpClient().newBuilder();
         okhttpBuilder.addInterceptor(OkHttpConfig.getHeaderInterceptor());
+        if (customHeader!=null){
+            okhttpBuilder.addInterceptor(customHeader);
+        }
         okhttpBuilder.addInterceptor(loggingInterceptor);
         okhttpBuilder.retryOnConnectionFailure(true);
         okHttpClient = okhttpBuilder.build();
@@ -54,7 +58,7 @@ public class NetApi {
 
 
     public void setCustomInterceptor(Interceptor customHeader) {
-        okhttpBuilder.addInterceptor(customHeader);
+        this.customHeader = customHeader;
     }
 
 }
