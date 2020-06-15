@@ -13,6 +13,9 @@ import androidx.annotation.Nullable;
 public class DefaultActivityLifeCallback extends IActivityLifeCallback {
 
 
+    public DefaultActivityLifeCallback(boolean showCurrentPageName) {
+       mShowCurrentActivityName = showCurrentPageName;
+    }
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
