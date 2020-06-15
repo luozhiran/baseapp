@@ -80,8 +80,19 @@ public class NetManager {
                                     onEmpty.empty(repo.code, msg);
                                 }
                             } else {
-                                if (NetApi.getInstance().getResponseInterceptor()==null||!NetApi.getInstance().getResponseInterceptor().interceptor(repo.code)){
-                                    onEmpty.empty(repo.code, repo.msg);
+                                boolean consumeCode = false;
+                                for (int code:NetApi.getInstance().getSuccessCode()){//某些code表示特殊的请求成功
+                                    if (repo.code == code){
+                                        consumeCode = true;
+                                        onResult.result(repo.data);
+                                        break;
+                                    }
+                                }
+                                if (!consumeCode) {
+                                    //拦截一些特殊的code
+                                    if (NetApi.getInstance().getResponseInterceptor() == null || !NetApi.getInstance().getResponseInterceptor().interceptor(repo.code)) {
+                                        onEmpty.empty(repo.code, repo.msg);
+                                    }
                                 }
                             }
                         } else {

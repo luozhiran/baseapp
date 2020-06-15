@@ -5,6 +5,9 @@ import com.yk.net_lib.intefaces.ResponseInterceptor;
 import com.yk.net_lib.interceptor.HttpLoggingInterceptor;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Interceptor;
@@ -23,6 +26,7 @@ public class NetApi {
     private HttpLoggingInterceptor loggingInterceptor;
     private static Interceptor customHeader;
     private ResponseInterceptor responseInterceptor;
+    private List<Integer> mSuccessCode;
 
     private static class Holder {
         private static NetApi netApi = new NetApi();
@@ -34,6 +38,7 @@ public class NetApi {
     }
 
     public NetApi() {
+        mSuccessCode = new ArrayList<>();
         loggingInterceptor = OkHttpConfig.getLogInterceptor(HttpLoggingInterceptor.Level.NONE);
         okhttpBuilder = new OkHttpClient().newBuilder();
         okhttpBuilder.addInterceptor(OkHttpConfig.getHeaderInterceptor());
@@ -68,7 +73,17 @@ public class NetApi {
     }
 
     ResponseInterceptor getResponseInterceptor() {
-
         return responseInterceptor;
+    }
+
+    public void addSuccessCode(int ...code){
+        mSuccessCode.clear();
+        for (int num:code){
+            mSuccessCode.add(num);
+        }
+    }
+
+    public List<Integer> getSuccessCode(){
+        return mSuccessCode;
     }
 }
