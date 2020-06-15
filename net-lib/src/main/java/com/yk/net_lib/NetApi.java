@@ -53,22 +53,8 @@ public class NetApi {
     }
 
 
-    public void customHeader(Map<String,String> headerMap) {
-        if (headerMap == null)return;
-        Interceptor customHeader = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request origin = chain.request();
-                Request.Builder builder = origin.newBuilder();
-                for (Map.Entry<String,String> entry:headerMap.entrySet()){
-                    builder.header(entry.getKey(),entry.getValue());
-                }
-                Request request = builder.build();
-                return chain.proceed(request);
-            }
-        };
+    public void setCustomInterceptor(Interceptor customHeader) {
         okhttpBuilder.addInterceptor(customHeader);
-
     }
 
 }
