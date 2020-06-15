@@ -100,6 +100,12 @@ public class SPUtils {
         return this;
     }
 
+    //强迫症患者使用
+    public void release(){
+        mSp = null;
+        mEdt=null;
+    }
+
 
 
 }

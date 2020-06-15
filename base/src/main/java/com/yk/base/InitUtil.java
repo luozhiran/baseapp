@@ -3,6 +3,7 @@ package com.yk.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.itg.util_lib.ToolConfig;
 import com.yk.base.crash.UnCatchExceptionHandler;
 import com.yk.base.utils.ApkUtils;
 import com.yk.base.utils.SystemGalleryUtils;
@@ -14,6 +15,7 @@ public class InitUtil {
         CustomToast.register(context);
         SystemGalleryUtils.Holder.holder.register(context);
         ApkUtils.register(context);
+        ToolConfig.init((Application) context);
     }
 
     public static void openActivityLife(Application application, IActivityLifeCallback activityLifeCallback) {
