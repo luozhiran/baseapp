@@ -20,7 +20,7 @@ public class NetApi {
     private OkHttpClient.Builder okhttpBuilder = null;
     private Retrofit retrofit;
     private HttpLoggingInterceptor loggingInterceptor;
-    private Interceptor customHeader;
+    private static Interceptor customHeader;
 
     private static class Holder {
         private static NetApi netApi = new NetApi();
@@ -57,8 +57,8 @@ public class NetApi {
     }
 
 
-    public void setCustomInterceptor(Interceptor customHeader) {
-        this.customHeader = customHeader;
+    public static void setCustomInterceptor(Interceptor it) {
+          customHeader = it;
     }
 
 }
