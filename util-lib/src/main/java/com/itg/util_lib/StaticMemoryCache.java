@@ -40,4 +40,7 @@ public class StaticMemoryCache {
             return (T) o;
         }
     }
+    public void remove(String key) {
+        mCache.remove(key);
+    }
 }
