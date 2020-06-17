@@ -4,6 +4,7 @@ import com.yk.base.BSApp;
 import com.yk.net_lib.NetInit;
 
 public class App extends BSApp {
+
     @Override
     public void onCreate() {
         super.onCreate();

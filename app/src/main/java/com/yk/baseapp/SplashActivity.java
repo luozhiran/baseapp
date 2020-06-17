@@ -17,7 +17,7 @@ public class SplashActivity extends BaseActivity {
     private static final int RC_WRITE_STORAGE = 1;
 
     private ActivitySplishBinding mRootView;
-    private String[] mPrem = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private String[] mPrem = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA};
 
     @Override
     public int layoutId() {

@@ -27,9 +27,18 @@ public abstract class IPresenterImpl<V extends IView> {
      */
     public IPresenterImpl attachView(V view) {
         this.mView = view;
-        lifecycleOwner = (LifecycleOwner) view;
+        if (view instanceof LifecycleOwner){
+            lifecycleOwner = (LifecycleOwner) view;
+        }
         return this;
     }
+
+    public IPresenterImpl attachView(V view,LifecycleOwner owner){
+        this.mView = view;
+        lifecycleOwner = owner;
+        return this;
+    }
+
 
     public IPresenterImpl attachHandle(Handler handler) {
         mHandle = handler;
