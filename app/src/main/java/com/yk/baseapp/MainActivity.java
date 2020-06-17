@@ -43,11 +43,7 @@ public class MainActivity extends BaseActivity {
         mRootView.web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mOwner, WebActivity.class);
-//                startActivity(intent);
-                Intent intent = new Intent(mOwner, ZoomPhotoActivity.class);
-                intent.putExtra(ZoomPhotoActivity.SHOW_POSITION,0);
-                intent.putExtra(ZoomPhotoActivity.ONE_IMG, "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
+                Intent intent = new Intent(mOwner, WebActivity.class);
                 startActivity(intent);
             }
         });
