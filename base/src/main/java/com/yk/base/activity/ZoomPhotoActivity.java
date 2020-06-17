@@ -5,7 +5,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.OnViewTapListener;
 import com.itg.util_lib.StatusBarUtil;
 import com.kongzue.dialog.interfaces.OnBackClickListener;
 import com.kongzue.dialog.interfaces.OnDialogButtonClickListener;
@@ -64,7 +67,15 @@ public class ZoomPhotoActivity extends BaseActivity {
             imgList.add(img);
         }
         viewPager.setCurrentItem(position);
-        viewPager.setAdapter(new SamplePagerAdapter(imgList));
+        SamplePagerAdapter samplePagerAdapter = new SamplePagerAdapter(imgList);
+        samplePagerAdapter.setOnViewTapListener(new OnViewTapListener() {
+          @Override
+          public void onViewTap(View view, float x, float y) {
+              finish();
+          }
+      });
+
+        viewPager.setAdapter(samplePagerAdapter);
     }
 
     @Override
