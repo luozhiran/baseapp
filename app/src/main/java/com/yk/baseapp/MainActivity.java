@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import io.reactivex.Observable;
 import okhttp3.internal.Util;
 
 
@@ -69,6 +70,9 @@ public class MainActivity extends BaseActivity {
         mRootView.cityList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mOwner,SelfSelectCityActivity.class);
+                startActivity(intent);
+
 
             }
         });
