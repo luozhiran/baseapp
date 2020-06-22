@@ -66,6 +66,17 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        mRootView.cityList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

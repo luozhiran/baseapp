@@ -11,11 +11,15 @@ import com.yk.base.utils.SystemGalleryUtils;
 public class InitUtil {
 
     public static void initUtil(Context context) {
-        UnCatchExceptionHandler.crash().attach(context);
-        CustomToast.register(context);
-        SystemGalleryUtils.Holder.holder.register(context);
-        ApkUtils.register(context);
-        ToolConfig.init((Application) context);
+        synchronized (InitUtil.class) {
+            if (ToolConfig.app() == null) {
+                UnCatchExceptionHandler.crash().attach(context);
+                CustomToast.register(context);
+                SystemGalleryUtils.Holder.holder.register(context);
+                ApkUtils.register(context);
+                ToolConfig.init((Application) context);
+            }
+        }
     }
 
     public static void openActivityLife(Application application, IActivityLifeCallback activityLifeCallback) {
