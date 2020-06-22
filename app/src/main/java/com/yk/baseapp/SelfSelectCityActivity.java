@@ -14,9 +14,13 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.cretin.tools.cityselect.CityResponse;
+import com.cretin.tools.cityselect.callback.OnCitySelectListener;
+import com.cretin.tools.cityselect.callback.OnLocationListener;
 import com.cretin.tools.cityselect.model.CityModel;
 import com.google.gson.Gson;
 import com.itg.util_lib.FileUtils;
@@ -46,6 +50,41 @@ public class SelfSelectCityActivity extends BaseActivity {
         mRootView.cityView.setSearchTips("请输入城市名称或者拼音");
         type = 0;
         initCityData(type);
+
+        //设置城市选择之后的事件监听
+        mRootView.cityView.setOnCitySelectListener(new OnCitySelectListener() {
+            @Override
+            public void onCitySelect(CityModel cityModel) {
+                Toast.makeText(SelfSelectCityActivity.this, "你点击了：" + cityModel.getCityName() + ":" + cityModel.getExtra().toString(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                intent.putExtra("model", cityModel);
+                setResult(RESULT_OK, intent);
+
+                finish();
+            }
+
+            @Override
+            public void onSelectCancel() {
+                Toast.makeText(SelfSelectCityActivity.this, "你取消了城市选择", Toast.LENGTH_SHORT).show();
+
+                finish();
+            }
+        });
+
+        //设置点击重新定位之后的事件监听
+        mRootView.cityView.setOnLocationListener(new OnLocationListener() {
+            @Override
+            public void onLocation() {
+                //这里模拟定位 两秒后给个随便的定位数据
+                mRootView.cityView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRootView.cityView.reBindCurrentCity(new CityModel("广州", "10000001"));
+                    }
+                }, 2000);
+            }
+        });
     }
 
     private void initCityData(int type){
