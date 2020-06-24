@@ -5,14 +5,21 @@ import android.os.Handler;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
+import com.yk.net_lib.NetApi;
 import com.yk.net_lib.NetLoading;
 import com.yk.net_lib.NetManager;
 import com.yk.net_lib.Repo;
 import com.yk.net_lib.intefaces.OnEmpty;
+import com.yk.net_lib.intefaces.OnMap;
 import com.yk.net_lib.intefaces.OnResult;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.Flowable;
+import io.reactivex.functions.BiFunction;
 
 
 public abstract class IPresenterImpl<V extends IView> {
@@ -141,4 +148,30 @@ public abstract class IPresenterImpl<V extends IView> {
             }
         });
     }
+
+
+
+    protected <T1,T2,R> void progressMultiFlowableCommon(Flowable<T1> flowable1, Flowable<T2> flowable2, OnMap<T1,T2,R> map, OnResult<R> onResult, OnEmpty onEmpty){
+        NetManager.progressMultiCommon(flowable1, flowable2, lifecycleOwner, new BiFunction<T1, T2, R>() {
+            @Override
+            public R apply(T1 t1, T2 t2) throws Exception {
+                return  map.map(t1,t2);
+            }
+        }, onResult, onEmpty, new NetLoading() {
+            @Override
+            public void start() {
+                mView.showLoading();
+            }
+
+            @Override
+            public void end() {
+                mView.hideLoading();
+            }
+        });
+
+    }
+
+
+
+
 }

@@ -105,7 +105,7 @@ public class StatusBarUtil {
             int red = (color & 0xff0000) >> 16;
             int green = (color & 0x00ff00) >> 8;
             int blue = color & 0x0000ff;
-            window.setStatusBarColor(Color.argb(1, red, green, blue));
+            window.setStatusBarColor(Color.argb(rate, red, green, blue));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //支持4.4到5.0
             ViewGroup decorView = (ViewGroup) window.getDecorView();
@@ -118,7 +118,7 @@ public class StatusBarUtil {
                 int red = (color & 0xff0000) >> 16;
                 int green = (color & 0x00ff00) >> 8;
                 int blue = color & 0x0000ff;
-                view.setBackgroundColor(Color.argb(1, red, green, blue));
+                view.setBackgroundColor(Color.argb(rate, red, green, blue));
             }
         }
     }

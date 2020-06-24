@@ -7,81 +7,97 @@
                 {
                     "areaId": "3116",
                     "name": "安庆",
+                    "adcode": "340800",
                     "sons": null
                 },
                 {
                     "areaId": "3111",
                     "name": "蚌埠",
+                    "adcode": "340300",
                     "sons": null
                 },
                 {
                     "areaId": "3122",
                     "name": "亳州",
+                    "adcode": "341600",
                     "sons": null
                 },
                 {
                     "areaId": "3118",
                     "name": "滁州",
+                    "adcode": "341100",
                     "sons": null
                 },
                 {
                     "areaId": "3123",
                     "name": "池州",
+                    "adcode": "341700",
                     "sons": null
                 },
                 {
                     "areaId": "3119",
                     "name": "阜阳",
+                    "adcode": "341200",
                     "sons": null
                 },
                 {
                     "areaId": "3109",
                     "name": "合肥",
+                    "adcode": "340100",
                     "sons": null
                 },
                 {
                     "areaId": "3112",
                     "name": "淮南",
+                    "adcode": "340400",
                     "sons": null
                 },
                 {
                     "areaId": "3114",
                     "name": "淮北",
+                    "adcode": "340600",
                     "sons": null
                 },
                 {
                     "areaId": "3117",
                     "name": "黄山",
+                    "adcode": "341000",
                     "sons": null
                 },
                 {
                     "areaId": "3121",
                     "name": "六安",
+                    "adcode": "341500",
                     "sons": null
                 },
                 {
                     "areaId": "3113",
                     "name": "马鞍山",
+                    "adcode": "340500",
                     "sons": null
                 },
                 {
                     "areaId": "3115",
                     "name": "铜陵",
+                    "adcode": "340700",
                     "sons": null
                 },
                 {
                     "areaId": "3110",
                     "name": "芜湖",
+                    "adcode": "340200",
                     "sons": null
                 },
                 {
                     "areaId": "3120",
                     "name": "宿州",
+                    "adcode": "341300",
                     "sons": null
                 },
                 {
                     "areaId": "3124",
                     "name": "宣城",
+                    "adcode": "341800",
                     "sons": null
                 }
             ]

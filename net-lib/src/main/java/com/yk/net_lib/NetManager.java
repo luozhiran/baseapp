@@ -7,9 +7,13 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import com.yk.net_lib.intefaces.OnEmpty;
 import com.yk.net_lib.intefaces.OnResult;
 
+import java.util.HashMap;
+import java.util.List;
+
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.Flowable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 
 public class NetManager {
@@ -154,5 +158,42 @@ public class NetManager {
                     }
                 });
     }
+
+    public static <T1,T2,R> void progressMultiCommon(Flowable<T1> flowable1,Flowable<T2> flowable2,LifecycleOwner lifecycleOwner, BiFunction<? super T1, ? super T2, ? extends R> zipper,OnResult<R> onResult, OnEmpty onEmpty, NetLoading netLoading){
+        if (netLoading != null) {
+            netLoading.start();
+        }
+        Flowable.zip(flowable1, flowable2, zipper).compose(RxScheduler.Flo_io_main())
+                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner, Lifecycle.Event.ON_DESTROY)))
+                .subscribe(new Consumer<R>() {
+                    @Override
+                    public void accept(R repo) throws Exception {
+                        if (repo != null) {
+                            onResult.result(repo);
+                        } else {
+                            onEmpty.empty(EMPTY_, msg);
+                        }
+                        if (netLoading != null) {
+                            netLoading.end();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        //网络异常提示
+                        NetExpection.NetExceptionTrip(throwable);
+                        onEmpty.empty(ERROR_, throwable.getMessage());
+                        if (netLoading != null) {
+                            netLoading.end();
+                        }
+                    }
+                });
+
+
+
+    }
+
+
+
 
 }

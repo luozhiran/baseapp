@@ -6,17 +6,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.itg.lib_log.L;
 import com.itg.util_lib.FileUtils;
 import com.yk.base.activity.ZoomPhotoActivity;
 import com.yk.base.base.BaseActivity;
 
+import com.yk.baseapp.abc.WrapAbc;
+import com.yk.baseapp.abc.WrapAbc1;
 import com.yk.baseapp.databinding.ActivityMainBinding;
 import com.yk.baseapp.test.DpiUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 import io.reactivex.Observable;
 import okhttp3.internal.Util;
@@ -70,10 +74,27 @@ public class MainActivity extends BaseActivity {
         mRootView.cityList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mOwner,SelfSelectCityActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(mOwner,SelfSelectCityActivity.class);
+//
+//                startActivity(intent);
 
 
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String str = FileUtils.readAssets("city.json");
+                        Gson gson = new Gson();
+                        WrapAbc1 a = gson.fromJson(str, WrapAbc1.class);
+
+
+                        String str1 = FileUtils.readAssets("abc.json");
+                        Gson gson1 = new Gson();
+                        WrapAbc b = gson.fromJson(str, WrapAbc.class);
+
+
+                        for ()
+                    }
+                }).start();
             }
         });
 
