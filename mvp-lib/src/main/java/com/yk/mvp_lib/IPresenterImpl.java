@@ -197,7 +197,7 @@ public abstract class IPresenterImpl<V extends IView> {
 
     }
 
-    protected <T1, T2, T3, T4, R> void progressMultiFlowableCommon3(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, Flowable<T4> flowable4, OnMap4<T1, T2, T3, T4, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
+    protected <T1, T2, T3, T4, R> void progressMultiFlowableCommon4(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, Flowable<T4> flowable4, OnMap4<T1, T2, T3, T4, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
         NetManager.progressMultiCommon4(flowable1, flowable2, flowable3, flowable4, lifecycleOwner, new Function4<T1, T2, T3, T4, R>() {
 
             @Override
