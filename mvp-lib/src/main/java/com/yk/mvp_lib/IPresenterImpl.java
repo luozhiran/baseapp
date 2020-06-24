@@ -2,6 +2,7 @@ package com.yk.mvp_lib;
 
 
 import android.os.Handler;
+
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
@@ -11,6 +12,8 @@ import com.yk.net_lib.NetManager;
 import com.yk.net_lib.Repo;
 import com.yk.net_lib.intefaces.OnEmpty;
 import com.yk.net_lib.intefaces.OnMap;
+import com.yk.net_lib.intefaces.OnMap3;
+import com.yk.net_lib.intefaces.OnMap4;
 import com.yk.net_lib.intefaces.OnResult;
 
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.Flowable;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function3;
+import io.reactivex.functions.Function4;
 
 
 public abstract class IPresenterImpl<V extends IView> {
@@ -34,13 +39,13 @@ public abstract class IPresenterImpl<V extends IView> {
      */
     public IPresenterImpl attachView(V view) {
         this.mView = view;
-        if (view instanceof LifecycleOwner){
+        if (view instanceof LifecycleOwner) {
             lifecycleOwner = (LifecycleOwner) view;
         }
         return this;
     }
 
-    public IPresenterImpl attachView(V view,LifecycleOwner owner){
+    public IPresenterImpl attachView(V view, LifecycleOwner owner) {
         this.mView = view;
         lifecycleOwner = owner;
         return this;
@@ -150,12 +155,11 @@ public abstract class IPresenterImpl<V extends IView> {
     }
 
 
-
-    protected <T1,T2,R> void progressMultiFlowableCommon(Flowable<T1> flowable1, Flowable<T2> flowable2, OnMap<T1,T2,R> map, OnResult<R> onResult, OnEmpty onEmpty){
+    protected <T1, T2, R> void progressMultiFlowableCommon(Flowable<T1> flowable1, Flowable<T2> flowable2, OnMap<T1, T2, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
         NetManager.progressMultiCommon(flowable1, flowable2, lifecycleOwner, new BiFunction<T1, T2, R>() {
             @Override
             public R apply(T1 t1, T2 t2) throws Exception {
-                return  map.map(t1,t2);
+                return map.map(t1, t2);
             }
         }, onResult, onEmpty, new NetLoading() {
             @Override
@@ -172,6 +176,46 @@ public abstract class IPresenterImpl<V extends IView> {
     }
 
 
+    protected <T1, T2, T3, R> void progressMultiFlowableCommon3(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, OnMap3<T1, T2, T3, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
+        NetManager.progressMultiCommon3(flowable1, flowable2, flowable3, lifecycleOwner, new Function3<T1, T2, T3, R>() {
 
+            @Override
+            public R apply(T1 t1, T2 t2, T3 t3) throws Exception {
+                return map.map(t1, t2, t3);
+            }
+        }, onResult, onEmpty, new NetLoading() {
+            @Override
+            public void start() {
+                mView.showLoading();
+            }
+
+            @Override
+            public void end() {
+                mView.hideLoading();
+            }
+        });
+
+    }
+
+    protected <T1, T2, T3, T4, R> void progressMultiFlowableCommon3(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, Flowable<T4> flowable4, OnMap4<T1, T2, T3, T4, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
+        NetManager.progressMultiCommon4(flowable1, flowable2, flowable3, flowable4, lifecycleOwner, new Function4<T1, T2, T3, T4, R>() {
+
+            @Override
+            public R apply(T1 t1, T2 t2, T3 t3, T4 t4) throws Exception {
+                return map.map(t1, t2, t3, t4);
+            }
+        }, onResult, onEmpty, new NetLoading() {
+            @Override
+            public void start() {
+                mView.showLoading();
+            }
+
+            @Override
+            public void end() {
+                mView.hideLoading();
+            }
+        });
+
+    }
 
 }

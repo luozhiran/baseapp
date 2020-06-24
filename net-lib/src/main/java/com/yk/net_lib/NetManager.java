@@ -15,6 +15,8 @@ import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.Flowable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function3;
+import io.reactivex.functions.Function4;
 
 public class NetManager {
     public static final int ERROR_ = -1111;
@@ -188,12 +190,70 @@ public class NetManager {
                         }
                     }
                 });
-
-
-
     }
 
 
+    public static <T1,T2,T3,R> void progressMultiCommon3(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, LifecycleOwner lifecycleOwner, Function3<? super T1, ? super T2, ? super T3, ? extends R> zipper, OnResult<R> onResult, OnEmpty onEmpty, NetLoading netLoading){
+        if (netLoading != null) {
+            netLoading.start();
+        }
+        Flowable.zip(flowable1, flowable2, flowable3,zipper).compose(RxScheduler.Flo_io_main())
+                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner, Lifecycle.Event.ON_DESTROY)))
+                .subscribe(new Consumer<R>() {
+                    @Override
+                    public void accept(R repo) throws Exception {
+                        if (repo != null) {
+                            onResult.result(repo);
+                        } else {
+                            onEmpty.empty(EMPTY_, msg);
+                        }
+                        if (netLoading != null) {
+                            netLoading.end();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        //网络异常提示
+                        NetExpection.NetExceptionTrip(throwable);
+                        onEmpty.empty(ERROR_, throwable.getMessage());
+                        if (netLoading != null) {
+                            netLoading.end();
+                        }
+                    }
+                });
+    }
 
+
+    public static <T1,T2,T3,T4,R> void progressMultiCommon4(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, Flowable<T4> flowable4, LifecycleOwner lifecycleOwner, Function4<? super T1, ? super T2, ? super T3, ? super T4,? extends R> zipper, OnResult<R> onResult, OnEmpty onEmpty, NetLoading netLoading){
+        if (netLoading != null) {
+            netLoading.start();
+        }
+        Flowable.zip(flowable1, flowable2, flowable3,flowable4,zipper).compose(RxScheduler.Flo_io_main())
+                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner, Lifecycle.Event.ON_DESTROY)))
+                .subscribe(new Consumer<R>() {
+                    @Override
+                    public void accept(R repo) throws Exception {
+                        if (repo != null) {
+                            onResult.result(repo);
+                        } else {
+                            onEmpty.empty(EMPTY_, msg);
+                        }
+                        if (netLoading != null) {
+                            netLoading.end();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        //网络异常提示
+                        NetExpection.NetExceptionTrip(throwable);
+                        onEmpty.empty(ERROR_, throwable.getMessage());
+                        if (netLoading != null) {
+                            netLoading.end();
+                        }
+                    }
+                });
+    }
 
 }
