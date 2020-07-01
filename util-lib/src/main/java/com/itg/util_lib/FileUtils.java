@@ -66,7 +66,7 @@ public class FileUtils {
         BufferedOutputStream bufIo = null;
         if (createNewFile(createFile)) {
             try {
-                out = new FileOutputStream(file);
+                out = new FileOutputStream(createFile);
                 bufIo = new BufferedOutputStream(out);
                 byte[] buffer = content.getBytes("UTF-8");
                 bufIo.write(buffer, 0, buffer.length);
