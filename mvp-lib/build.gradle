@@ -37,5 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 //    api  "com.yk.base:net-lib:0.1.0"
-    implementation project(':net-lib')
+    api project(':net-lib')
 }
