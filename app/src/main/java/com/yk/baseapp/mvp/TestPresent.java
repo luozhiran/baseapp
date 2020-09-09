@@ -3,7 +3,7 @@ package com.yk.baseapp.mvp;
 
 import com.yk.mvp_lib.IPresenterImpl;
 import com.yk.net_lib.NetApi;
-import com.yk.net_lib.intefaces.OnEmpty;
+import com.yk.net_lib.intefaces.OnError;
 import com.yk.net_lib.intefaces.OnResult;
 
 import java.io.IOException;
@@ -26,12 +26,11 @@ public class TestPresent extends IPresenterImpl<BaiduView> {
                     e.printStackTrace();
                 }
             }
-        }, new OnEmpty() {
+        }, new OnError() {
             @Override
-            public void empty(int code, String msg) {
+            public void error(int code, String msg) {
 
             }
-
         });
     }
 
@@ -47,10 +46,9 @@ public class TestPresent extends IPresenterImpl<BaiduView> {
                     e.printStackTrace();
                 }
             }
-        } ,new OnEmpty() {
-
+        } ,new OnError() {
             @Override
-            public void empty(int code, String msg) {
+            public void error(int code, String msg) {
 
             }
         });
@@ -68,12 +66,11 @@ public class TestPresent extends IPresenterImpl<BaiduView> {
                     e.printStackTrace();
                 }
             }
-        }, new OnEmpty() {
+        },new OnError() {
             @Override
-            public void empty(int code, String msg) {
+            public void error(int code, String msg) {
 
             }
-
         });
     }
 }
