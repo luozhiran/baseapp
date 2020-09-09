@@ -53,7 +53,7 @@ public class ActivityStackManager {
         if (activities != null && activities.size() > 0) {
             if (activities.search(activity) == -1) {
                 activities.push(activity);
-                return ;
+                return;
             }
 
             int location = activities.search(activity);
@@ -102,4 +102,6 @@ public class ActivityStackManager {
     public Stack<Activity> getActivityStack() {
         return activities;
     }
+
+
 }

@@ -64,7 +64,7 @@ public class NetExpection {
         }
     }
 
-    private static void show(String msg){
+    public static void show(String msg){
         if (NetInit.app()!=null) {
             Toast.makeText(NetInit.app(), msg, Toast.LENGTH_SHORT).show();
         }

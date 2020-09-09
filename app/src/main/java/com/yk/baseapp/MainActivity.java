@@ -90,9 +90,6 @@ public class MainActivity extends BaseActivity {
                         String str1 = FileUtils.readAssets("abc.json");
                         Gson gson1 = new Gson();
                         WrapAbc b = gson.fromJson(str, WrapAbc.class);
-
-
-                        for ()
                     }
                 }).start();
             }

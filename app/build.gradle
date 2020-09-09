@@ -39,4 +39,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(':base')
     implementation project(':cityselect')
+    implementation 'com.yk.base:base:0.0.7'
 }

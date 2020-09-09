@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+//apply from: '../upload_nexus.gradle'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -36,5 +36,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    api  "com.yk.base:net-lib:0.1.0"
     api project(':net-lib')
 }

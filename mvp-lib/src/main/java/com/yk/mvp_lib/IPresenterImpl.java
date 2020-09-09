@@ -10,7 +10,7 @@ import com.yk.net_lib.NetApi;
 import com.yk.net_lib.NetLoading;
 import com.yk.net_lib.NetManager;
 import com.yk.net_lib.Repo;
-import com.yk.net_lib.intefaces.OnEmpty;
+import com.yk.net_lib.intefaces.OnError;
 import com.yk.net_lib.intefaces.OnMap;
 import com.yk.net_lib.intefaces.OnMap3;
 import com.yk.net_lib.intefaces.OnMap4;
@@ -95,7 +95,7 @@ public abstract class IPresenterImpl<V extends IView> {
     }
 
 
-    protected <T> void progressFlowableBody(Flowable<T> flowable, OnResult<T> onResult, OnEmpty onEmpty) {
+    protected <T> void progressFlowableBody(Flowable<T> flowable, OnResult<T> onResult, OnError onEmpty) {
         NetManager.progressFlowableBody(flowable, lifecycleOwner, onResult, onEmpty, new NetLoading() {
             @Override
             public void start() {
@@ -117,7 +117,7 @@ public abstract class IPresenterImpl<V extends IView> {
      * @param onEmpty
      * @param <T>
      */
-    protected <T> void progressFlowableRepo(Flowable<Repo<T>> flowable, OnResult<T> onResult, OnEmpty onEmpty) {
+    protected <T> void progressFlowableRepo(Flowable<Repo<T>> flowable, OnResult<T> onResult, OnError onEmpty) {
         NetManager.progressFlowableRepo(flowable, lifecycleOwner, onResult, onEmpty, new NetLoading() {
             @Override
             public void start() {
@@ -140,7 +140,7 @@ public abstract class IPresenterImpl<V extends IView> {
      * @param onEmpty
      * @param <T>
      */
-    protected <T> void progressFlowableCommon(Flowable<T> flowable, OnResult<T> onResult, OnEmpty onEmpty) {
+    protected <T> void progressFlowableCommon(Flowable<T> flowable, OnResult<T> onResult, OnError onEmpty) {
         NetManager.progressFlowableCommon(flowable, lifecycleOwner, onResult, onEmpty, new NetLoading() {
             @Override
             public void start() {
@@ -155,7 +155,7 @@ public abstract class IPresenterImpl<V extends IView> {
     }
 
 
-    protected <T1, T2, R> void progressMultiFlowableCommon(Flowable<T1> flowable1, Flowable<T2> flowable2, OnMap<T1, T2, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
+    protected <T1, T2, R> void progressMultiFlowableCommon(Flowable<T1> flowable1, Flowable<T2> flowable2, OnMap<T1, T2, R> map, OnResult<R> onResult, OnError onEmpty) {
         NetManager.progressMultiCommon(flowable1, flowable2, lifecycleOwner, new BiFunction<T1, T2, R>() {
             @Override
             public R apply(T1 t1, T2 t2) throws Exception {
@@ -176,7 +176,7 @@ public abstract class IPresenterImpl<V extends IView> {
     }
 
 
-    protected <T1, T2, T3, R> void progressMultiFlowableCommon3(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, OnMap3<T1, T2, T3, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
+    protected <T1, T2, T3, R> void progressMultiFlowableCommon3(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, OnMap3<T1, T2, T3, R> map, OnResult<R> onResult, OnError onEmpty) {
         NetManager.progressMultiCommon3(flowable1, flowable2, flowable3, lifecycleOwner, new Function3<T1, T2, T3, R>() {
 
             @Override
@@ -197,7 +197,7 @@ public abstract class IPresenterImpl<V extends IView> {
 
     }
 
-    protected <T1, T2, T3, T4, R> void progressMultiFlowableCommon4(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, Flowable<T4> flowable4, OnMap4<T1, T2, T3, T4, R> map, OnResult<R> onResult, OnEmpty onEmpty) {
+    protected <T1, T2, T3, T4, R> void progressMultiFlowableCommon4(Flowable<T1> flowable1, Flowable<T2> flowable2, Flowable<T3> flowable3, Flowable<T4> flowable4, OnMap4<T1, T2, T3, T4, R> map, OnResult<R> onResult, OnError onEmpty) {
         NetManager.progressMultiCommon4(flowable1, flowable2, flowable3, flowable4, lifecycleOwner, new Function4<T1, T2, T3, T4, R>() {
 
             @Override
