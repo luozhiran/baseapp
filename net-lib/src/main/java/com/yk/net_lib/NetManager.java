@@ -74,24 +74,29 @@ public class NetManager {
                         if (repo.code == 0) {
                             onResult.result(repo.data);
                         } else {
-                            boolean consumeCode = false;
-                            for (int code : NetApi.getInstance().getSuccessCode()) {//NetApi.getInstance().getSuccessCode()返回 特殊成功code码，
-                                if (repo.code == code) {
-                                    consumeCode = true;
-                                    onResult.result(repo.data);
-                                    break;
+                            if (repo.businessData ==null){
+                                onError.error(-1000, "没有businessCode");
+                            }else {
+                                boolean consumeCode = false;
+                                for (int code : NetApi.getInstance().getSuccessCode()) {//NetApi.getInstance().getSuccessCode()返回 特殊成功code码，
+                                    if (repo.businessData.businessCode == code) {
+                                        consumeCode = true;
+                                        onResult.result(repo.data);
+                                        break;
+                                    }
                                 }
-                            }
-                            if (!consumeCode) {
-                                //对一些特殊的错误码进行拦截，如果拦截器返回false，表示拦截器不处理，回调error()返回，否则在一个地方做全局处理，不执行error
-                                if (NetApi.getInstance().getResponseInterceptor() != null && NetApi.getInstance().getResponseInterceptor().interceptor(repo.code, repo.msg)) {
+                                if (!consumeCode) {
+                                    //对一些特殊的错误码进行拦截，如果拦截器返回false，表示拦截器不处理，回调error()返回，否则在一个地方做全局处理，不执行error
+                                    if (NetApi.getInstance().getResponseInterceptor() != null && NetApi.getInstance().getResponseInterceptor().interceptor(repo.code, repo.msg)) {
 
-                                } else {
-                                    NetExpection.show(repo.msg);
-                                    onError.error(repo.code, repo.msg);
+                                    } else {
+                                        NetExpection.show(repo.msg);
+                                        onError.error(repo.businessData.businessCode, repo.msg);
+                                    }
                                 }
                             }
-                        }
+                            }
+
                         if (netLoading != null) {
                             netLoading.end();
                         }
