@@ -63,8 +63,8 @@ dependencies {
 
     //Android
     implementation 'com.android.support:multidex:1.0.3'
-    implementation project(':mvp-lib')
-    implementation project(':util-lib')
+    api project(':mvp-lib')
+    api project(':util-lib')
 }
 
 
