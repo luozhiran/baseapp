@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin:'com.github.dcendents.android-maven'
+group='com.github.luozhiran'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -62,7 +63,8 @@ dependencies {
 
     //Android
     implementation 'com.android.support:multidex:1.0.3'
-    api project(':mvp-lib')
+    implementation project(':mvp-lib')
+    implementation project(':util-lib')
 }
 
 
