@@ -87,7 +87,7 @@ public class NetManager {
                                 }
                                 if (!consumeCode) {
                                     //对一些特殊的错误码进行拦截，如果拦截器返回false，表示拦截器不处理，回调error()返回，否则在一个地方做全局处理，不执行error
-                                    if (NetApi.getInstance().getResponseInterceptor() != null && NetApi.getInstance().getResponseInterceptor().interceptor(repo.code, repo.msg)) {
+                                    if (NetApi.getInstance().getResponseInterceptor() != null && NetApi.getInstance().getResponseInterceptor().interceptor(repo.businessData.businessCode, repo.msg)) {
 
                                     } else {
                                         NetExpection.show(repo.msg);
