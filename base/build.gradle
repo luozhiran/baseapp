@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-//apply from: '../upload_nexus.gradle'
 apply plugin:'com.github.dcendents.android-maven'
 android {
     compileSdkVersion 29
@@ -63,10 +62,6 @@ dependencies {
 
     //Android
     implementation 'com.android.support:multidex:1.0.3'
-
-//    api 'com.yk.base:util-lib:0.0.9'
-//    api "com.yk.base:mvp-lib:0.1.1"
-//    api project(':util-lib')
     api project(':mvp-lib')
 }
 
