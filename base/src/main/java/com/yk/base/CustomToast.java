@@ -19,9 +19,7 @@ public class CustomToast {
     @SuppressLint("ShowToast")
     public static void register(Context context) {
         mContext = context;
-        mToast = new Toast(context);
-        mToast.setText("");
-        mToast.setDuration(Toast.LENGTH_LONG);
+        mToast =Toast.makeText(mContext,"",Toast.LENGTH_LONG);
     }
 
     public static void showToast(String msg) {
