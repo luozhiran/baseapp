@@ -1,15 +1,14 @@
 package com.yk.baseapp;
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.view.View;
 
 import com.google.gson.Gson;
 import com.itg.lib_log.L;
 import com.itg.util_lib.FileUtils;
-import com.yk.base.activity.ZoomPhotoActivity;
 import com.yk.base.base.BaseActivity;
 
 import com.yk.baseapp.abc.WrapAbc;
@@ -18,12 +17,8 @@ import com.yk.baseapp.databinding.ActivityMainBinding;
 import com.yk.baseapp.test.DpiUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
 
-import io.reactivex.Observable;
-import okhttp3.internal.Util;
+import androidx.annotation.RequiresApi;
 
 
 public class MainActivity extends BaseActivity {
@@ -39,10 +34,20 @@ public class MainActivity extends BaseActivity {
     public void init() {
         mRootView = findByView();
         mRootView.request.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mOwner, TestNetActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(mOwner, TestNetActivity.class);
+//                startActivity(intent);
+
+                try {
+                    Class<?> c = Class.forName("android.widget.Toast");
+                    c.getDeclaredField("mContext");
+                } catch (NoSuchFieldException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         });
         mRootView.web.setOnClickListener(new View.OnClickListener() {

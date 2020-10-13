@@ -19,19 +19,14 @@ public class CustomToast {
     @SuppressLint("ShowToast")
     public static void register(Context context) {
         mContext = context;
-        mToast = Toast.makeText(mContext, "init", Toast.LENGTH_SHORT);
+        mToast = new Toast(context);
+        mToast.setText("");
+        mToast.setDuration(Toast.LENGTH_LONG);
     }
 
     public static void showToast(String msg) {
-        if (System.currentTimeMillis() - time > 800&& !TextUtils.isEmpty(msg)) {
-            mToast.setText(msg);
-            mToast.show();
-            time = System.currentTimeMillis();
-        } else {
-            mToast.cancel();
-        }
-
-//        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+        mToast.setText(msg);
+        mToast.show();
     }
 
 }
