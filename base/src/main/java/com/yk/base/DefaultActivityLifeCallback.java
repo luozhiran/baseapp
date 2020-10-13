@@ -2,6 +2,7 @@ package com.yk.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.yk.base.IActivityLifeCallback;
 
@@ -30,6 +31,9 @@ public class DefaultActivityLifeCallback extends IActivityLifeCallback {
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
         super.onActivityResumed(activity);
+        if (mShowCurrentActivityName){
+            Toast.makeText(activity,activity.getClass().getSimpleName(),Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
