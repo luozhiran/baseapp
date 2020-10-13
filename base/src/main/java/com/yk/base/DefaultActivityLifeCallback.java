@@ -32,7 +32,7 @@ public class DefaultActivityLifeCallback extends IActivityLifeCallback {
     public void onActivityResumed(@NonNull Activity activity) {
         super.onActivityResumed(activity);
         if (mShowCurrentActivityName){
-            Toast.makeText(activity,activity.getClass().getSimpleName(),Toast.LENGTH_SHORT).show();
+            CustomToast.showToast(activity.getClass().getSimpleName());
         }
     }
 
