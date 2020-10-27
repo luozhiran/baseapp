@@ -28,14 +28,16 @@ public class ApkUtils {
     }
 
     // 3.下载成功，开始安装,兼容8.0安装位置来源的权限
-    public static void installApkO(AppCompatActivity activity, String downloadApkPath,boolean closeActivity) {
+    public static void installApkO(AppCompatActivity activity, String downloadApkPath, boolean closeActivity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //是否有安装位置来源的权限
             boolean haveInstallPermission = mApp.getPackageManager().canRequestPackageInstalls();
             if (haveInstallPermission) {
                 L.i("8.0手机已经拥有安装未知来源应用的权限，直接安装！");
                 installApk(downloadApkPath);
-                activity.finish();
+                if (closeActivity) {
+                    activity.finish();
+                }
             } else {
                 MessageDialog.show(activity, "", "安装应用需要打开安装未知来源应用权限，请去设置中开启权限", "确定")
                         .setOnOkButtonClickListener((baseDialog, v) -> {
@@ -43,7 +45,9 @@ public class ApkUtils {
                             Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageUri);
                             activity.startActivityForResult(intent, 10086);
                             return false;
-                        }).setOnDismissListener(() -> activity.finish());
+                        }).setOnDismissListener(() -> {
+                    if (closeActivity) activity.finish();
+                });
             }
         } else {
             installApk(downloadApkPath);
@@ -56,7 +60,7 @@ public class ApkUtils {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         File file = new File(downloadApk);
         L.i("安装路径==" + downloadApk);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri apkUri = FileProvider.getUriForFile(mApp, "com.yk.surveyor.fileprovider", file);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
