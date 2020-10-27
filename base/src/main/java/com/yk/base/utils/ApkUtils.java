@@ -28,7 +28,7 @@ public class ApkUtils {
     }
 
     // 3.下载成功，开始安装,兼容8.0安装位置来源的权限
-    public static void installApkO(AppCompatActivity activity, String downloadApkPath) {
+    public static void installApkO(AppCompatActivity activity, String downloadApkPath,boolean closeActivity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //是否有安装位置来源的权限
             boolean haveInstallPermission = mApp.getPackageManager().canRequestPackageInstalls();
@@ -56,13 +56,12 @@ public class ApkUtils {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         File file = new File(downloadApk);
         L.i("安装路径==" + downloadApk);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri apkUri = FileProvider.getUriForFile(mApp, "com.yk.surveyor.fileprovider", file);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
             intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
         } else {
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Uri uri = Uri.fromFile(file);
             intent.setDataAndType(uri, "application/vnd.android.package-archive");
         }
