@@ -15,6 +15,7 @@ import com.kongzue.dialog.v3.MessageDialog;
 
 import java.io.File;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -73,6 +74,7 @@ public class ApkUtils {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public static long getApkVersionCode() {
         PackageManager manager = mApp.getPackageManager();
         try {
@@ -84,6 +86,7 @@ public class ApkUtils {
         }
         return 0;
     }
+
 
     public static String getApkVersionName() {
         PackageManager manager = mApp.getPackageManager();
