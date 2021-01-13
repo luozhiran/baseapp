@@ -79,7 +79,7 @@ public class NetManager {
                             }else {
                                 boolean consumeCode = false;
                                 for (int code : NetApi.getInstance().getSuccessCode()) {//NetApi.getInstance().getSuccessCode()返回 特殊成功code码，
-                                    if (repo.businessData.businessCode == code) {
+                                    if (repo.businessData.businessCode == code&&repo.data!=null) {
                                         consumeCode = true;
                                         onResult.result(repo.data);
                                         break;
